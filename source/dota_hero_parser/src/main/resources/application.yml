@@ -1,0 +1,37 @@
+server:
+  port: 8081
+
+app:
+  data-base:
+      name: dota_advisor
+      link: localhost
+      port: 3306
+      autoReconnect: true
+      useSSL: false
+      serverTimezone: UTC
+      username: root
+      password: QWEasd123
+  hero:
+    resources:
+      url: https://dotabuff.com/heroes
+
+spring:
+  jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5Dialect
+      show-sql: false
+      hibernate:
+        ddl-auto: update
+
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: >
+        jdbc:mysql://${app.data-base.link}:${app.data-base.port}/
+        ${app.data-base.name}
+        ?autoReconnect=${app.data-base.autoReconnect}&
+        useSSL=${app.data-base.useSSL}&
+        serverTimezone=${app.data-base.serverTimezone}
+      username: ${app.data-base.username}
+      password: ${app.data-base.password}
+
