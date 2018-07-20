@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <link rel="stylesheet" href=/css/style.css>
+</head>
+
+<body id="home" class="homepage">
+<label>
+    <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+        <option value="AL">Alabama</option>
+        <option value="WY">Wyoming</option>
+    </select>
+</label>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
+</body>
+</html>
