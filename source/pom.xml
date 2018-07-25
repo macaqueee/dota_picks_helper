@@ -10,6 +10,7 @@
     <modules>
         <module>dota_advisor</module>
         <module>dota_hero_parser</module>
+        <module>dota_advisor_frontend</module>
     </modules>
     <packaging>pom</packaging>
 </project>

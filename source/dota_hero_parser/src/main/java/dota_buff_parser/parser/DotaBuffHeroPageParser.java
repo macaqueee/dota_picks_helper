@@ -13,7 +13,8 @@ import java.util.List;
 @Component
 public class DotaBuffHeroPageParser implements HeroPageParser {
 
-    private ParserUtils parserUtils;
+    private final ParserUtils parserUtils;
+
     private static final String HEROES_CONTAINER_CLASS_NAME = "hero-grid";
 
     private static final String ALL_HEROES_HTML_ATTRIBUTE = "href";

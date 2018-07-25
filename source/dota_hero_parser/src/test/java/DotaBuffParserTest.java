@@ -16,7 +16,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Run.class)
-@Ignore
+//@Ignore
 public class DotaBuffParserTest {
 
     @Autowired
