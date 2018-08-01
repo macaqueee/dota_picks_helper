@@ -1,68 +1,41 @@
 import React, {Component} from "react";
-import axios from "axios";
 import Gallery from "react-grid-gallery"
+import {AxiosConfig} from "app/config/axios-config"
 
 class HeroSection extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            images: []
-        }
+
+        this.createHeroImageLinks = this.createHeroImageLinks.bind(this);
     }
 
-    componentWillMount() {
-        let heroes = [];
-        axios.get('http://localhost:8080/heroes')
-            .then((response) => {
-                heroes = response.data.map(hero => {
-                    let heroLink = 'http://localhost:8085/assets/images/' + hero.heroName + '.jpg';
-                    return {
-                        src: heroLink,
-                        caption: hero.heroName,
-                        thumbnail: heroLink,
-                        thumbnailWidth: 128,
-                        thumbnailHeight: 72,
-                        isSelected: true
-                    }
-                });
-
-                this.setState({
-                    images: heroes
-                })
-            })
-            .catch((response) => {
-                console.log(error);
-            });
+    createHeroImageLinks(heroes) {
+        return heroes.map(heroName => {
+            let heroLink = AxiosConfig.front_url + '/assets/images/' + heroName + '.jpg';
+            return {
+                src: heroLink,
+                caption: heroName,
+                thumbnail: heroLink,
+                thumbnailWidth: 128,
+                thumbnailHeight: 72,
+                isSelected: false
+            }
+        })
     }
 
-    // componentDidMount() {
-    //     let heroes = [];
-    //     axios.get('http://localhost:8080/heroes')
-    //         .then(function (response) {
-    //             console.log(response);
-    //             heroes = response.data;
-    //             this.setState({
-    //                 images: heroes.map(heroName => {
-    //                     let heroLink = '/assets/images/' + heroName + '.jpg';
-    //                     return {
-    //                         src: heroLink,
-    //                         caption: heroName
-    //                     }
-    //                 })
-    //             })
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
-    // }
+    prepareHeroSection(heroEnemies) {
 
-
+    }
     render() {
-        let images = this.state.images;
-        return (<div>
-                <Gallery images={images}></Gallery>
-            </div>
+        return (
+            <Gallery images={this.createHeroImageLinks(this.props.heroEnemyNames)}
+                     rowHeight={50}
+                     enableImageSelection={false}
+                     enableLightbox={false}
+                     showCloseButton={false}
+                     margin={3}>
+            </Gallery>
         )
     }
 }

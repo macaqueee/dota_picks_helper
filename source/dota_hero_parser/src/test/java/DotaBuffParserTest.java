@@ -5,14 +5,17 @@ import dota_buff_parser.config.AppConfigHolder;
 import dota_buff_parser.exception.ApplicationException;
 import dota_buff_parser.service.DotaBuffHeroUpdaterService;
 import dota_buff_parser.utils.CollectionUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Run.class)
@@ -48,9 +51,15 @@ public class DotaBuffParserTest {
     }
 
     @Test
+    @Transactional
     public void testUpdateHeroes() throws ApplicationException {
-        heroUpdaterService.updateHeroes();
+        //heroUpdaterService.updateHeroes();
         List<Hero> heroes = heroRepository.findAll();
+        heroes.forEach(hero -> assertThat("Hero has 10 strong heroes",
+                hero.getHeroStrongEnemies().size(), equalTo(10)));
+
+        heroes.forEach(hero -> assertThat("Hero has 10 strong heroes",
+                hero.getHeroWeakEnemies().size(), equalTo(10)));
         System.out.println("hello");
     }
 

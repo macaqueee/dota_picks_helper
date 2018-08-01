@@ -1,5 +1,4 @@
 //const API_URL = "http://localhost:3000/"
-//const API_URL = this._http.get(process.env.API_URL);
 const ENDPOINTS = {
     GET_HERO_INFO: {
         URL: "/heroes",
@@ -7,18 +6,18 @@ const ENDPOINTS = {
     }
 };
 
+const API_URL = process.env.API_URL;
+const HTTP_IP_ADDRESS = API_URL.substr(0, API_URL.lastIndexOf(":"));
+const ASSETS_PORT = 8085;
+const FRONT_RESOURCES_URL = HTTP_IP_ADDRESS + ':' + ASSETS_PORT;
+
 const AxiosConfig = {
     url: '',
     method: 'get',
-    baseURL: (`${process.env.API_URL}`) ? `${process.env.API_URL}` : "https://localhost:8080",
-    withCredentials: true//, // default
-    /*transformResponse: [function (data) {
-        if (data == 'Unauthorized') {
-            window.location.href = '/login';
-        }
-        else {
-            return JSON.parse(data);
-        }
-    }],*/
+    baseURL: API_URL ? API_URL : "http://localhost:8080",
+    withCredentials: true,
+    front_url : FRONT_RESOURCES_URL
 };
-export { ENDPOINTS, AxiosConfig}
+
+
+export {ENDPOINTS, AxiosConfig}

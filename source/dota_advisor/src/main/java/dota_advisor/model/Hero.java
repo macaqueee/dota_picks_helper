@@ -21,14 +21,29 @@ public class Hero {
             inverseJoinColumns={@JoinColumn(name="STRONG_ID")})
     private List<Hero> heroStrongEnemies;
 
-    @ManyToMany(mappedBy = "heroStrongEnemies")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="HERO_WEAK_ENEMIES",
+            joinColumns={@JoinColumn(name="HERO_ID")},
+            inverseJoinColumns={@JoinColumn(name="STRONG_ID")})
     private List<Hero> heroWeakEnemies;
+
+    @ManyToMany(mappedBy = "heroStrongEnemies")
+    private List<Hero> reverseStrongEnemies;
+
+    @ManyToMany(mappedBy = "heroWeakEnemies")
+    private List<Hero> reverseWeakEnemies;
 
     public Hero() {
     }
 
     public Hero(String heroName) {
         this.heroName = heroName;
+    }
+
+    public Hero(String heroName, List<Hero> heroStrongEnemies, List<Hero> heroWeakEnemies) {
+        this.heroName = heroName;
+        this.heroStrongEnemies = heroStrongEnemies;
+        this.heroWeakEnemies = heroWeakEnemies;
     }
 
     public Long getHeroId() {
@@ -63,26 +78,19 @@ public class Hero {
         this.heroWeakEnemies = heroWeakEnemies;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Hero hero = (Hero) o;
-
-        if (heroId != null ? !heroId.equals(hero.heroId) : hero.heroId != null) return false;
-        if (heroName != null ? !heroName.equals(hero.heroName) : hero.heroName != null) return false;
-        if (heroStrongEnemies != null ? !heroStrongEnemies.equals(hero.heroStrongEnemies) : hero.heroStrongEnemies != null)
-            return false;
-        return heroWeakEnemies != null ? heroWeakEnemies.equals(hero.heroWeakEnemies) : hero.heroWeakEnemies == null;
+    public List<Hero> getReverseStrongEnemies() {
+        return reverseStrongEnemies;
     }
 
-    @Override
-    public int hashCode() {
-        int result = heroId != null ? heroId.hashCode() : 0;
-        result = 31 * result + (heroName != null ? heroName.hashCode() : 0);
-        result = 31 * result + (heroStrongEnemies != null ? heroStrongEnemies.hashCode() : 0);
-        result = 31 * result + (heroWeakEnemies != null ? heroWeakEnemies.hashCode() : 0);
-        return result;
+    public void setReverseStrongEnemies(List<Hero> reverseStrongEnemies) {
+        this.reverseStrongEnemies = reverseStrongEnemies;
+    }
+
+    public List<Hero> getReverseWeakEnemies() {
+        return reverseWeakEnemies;
+    }
+
+    public void setReverseWeakEnemies(List<Hero> reverseWeakEnemies) {
+        this.reverseWeakEnemies = reverseWeakEnemies;
     }
 }

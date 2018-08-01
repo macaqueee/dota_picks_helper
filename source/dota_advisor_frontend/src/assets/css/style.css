@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    position: relative;
+}
+.center {
+    width: 800px;
+    font-family: Tahoma, cursive;
+}
+
+.select2-drop.newclass {
+    border: 1px solid red;
+}
+
+.select2-default span {
+    color: red;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+html {
+    display: table;
+}
+center-cell {
+    display: table-cell;
+    vertical-align: middle;
+}

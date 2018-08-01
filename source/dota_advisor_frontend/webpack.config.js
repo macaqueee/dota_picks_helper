@@ -1,6 +1,9 @@
+var webpack = require('webpack');
 var loaders = require('./webpackv2.loaders.js');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
+
+console.log("===============",process.env.API_URL,"============");
 
 module.exports = {
     devServer: {
@@ -17,6 +20,10 @@ module.exports = {
             path.resolve(__dirname),
             "node_modules"
         ],
+        alias: {
+            'app/utils': 'src/utils',
+            'app/config': 'src/config',
+        },
         extensions: ['.js', '.jsx']
     },
     module: {
@@ -31,5 +38,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: __dirname + "/src/index.html"
         }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'API_URL': JSON.stringify(process.env.API_URL || "http://localhost:8080/")
+            }
+        })
     ]
 };

@@ -9,7 +9,7 @@
     "build:prod": "NODE_ENV=production webpack --env=prod --progress --profile --colors",
     "build": "npm run build:prod",
     "start": "NODE_ENV=production webpack --host 0.0.0.0 --env=prod",
-    "dev": "webpack-dev-server --content-base src --inline --hot --port 8085"
+    "dev": "webpack-dev-server --content-base src --host 0.0.0.0 --inline --hot --port 8085"
   },
   "repository": {
     "type": "git",
@@ -22,13 +22,23 @@
   "license": "MIT",
   "homepage": "",
   "dependencies": {
+    "axios": "latest",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-react-html-attrs": "^2.1.0",
-    "react": "latest",
+    "css-loader": "^1.0.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
     "react-grid-gallery": "^0.5.1",
-    "axios": "latest"
+    "react-photo-gallery": "^6.0.29",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.5.2",
+    "react-select": "^1.2.0",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.1.0",
+    "style-loader": "^0.21.0"
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -37,11 +47,12 @@
     "babel-preset-stage-0": "^6.24.1",
     "webpack": "^4.16.2",
     "webpack-dev-server": "^3.1.5",
-    "redux-logger": "latest",
-    "redux-thunk": "latest",
-    "redux": "latest",
-    "react-router": "3.0.5",
-    "react-redux": "latest",
-    "react-dom": "latest"
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.5.2",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.1.0"
   }
 }

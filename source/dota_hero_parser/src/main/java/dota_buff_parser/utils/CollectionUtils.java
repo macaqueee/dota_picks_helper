@@ -13,12 +13,16 @@ public class CollectionUtils {
         List<Hero> resultList = new ArrayList<>();
         col2.forEach(hero -> {
             String heroName = hero.getHeroName();
-
-            col1.stream().filter(innerHero -> innerHero.getHeroName().equals(heroName))
-                    .findFirst()
-                    .ifPresent(resultList::add);
-
+            col1.forEach(innerHero -> {
+                if (isHeroPresent(innerHero, heroName)){
+                    resultList.add(innerHero);
+                }
+            });
         });
         return resultList;
+    }
+
+    private boolean isHeroPresent(Hero innerHero, String heroName) {
+        return innerHero.getHeroName().equals(heroName);
     }
 }

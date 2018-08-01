@@ -1,12 +1,8 @@
-import {AxiosConfig} from '../config/axios-endpoints'
-import {getCookie} from 'dashboard-app/utils/common-utils'
-import {ENDPOINTS} from 'dashboard-app/config/axios-endpoints'
+import {AxiosConfig} from 'app/config/axios-config'
 
 const getAxiosConfig = (endpoint, method, params = {}, token = '') => {
 
     let axiosConfig;
-
-    if(!token) token = getCookie('token');
     axiosConfig = Object.assign({}, AxiosConfig);
 
     axiosConfig.method = method;
@@ -19,18 +15,7 @@ const getAxiosConfig = (endpoint, method, params = {}, token = '') => {
         axiosConfig.data = (params);
     }
 
-    if(endpoint === ENDPOINTS.LOGIN) {
-        axiosConfig.headers = {
-            'Content-Type': 'text/plain'
-        };
-
-    } else {
-        axiosConfig.headers = {
-            'Content-Type': 'application/json'
-        };
-    }
-
-    if (token) {
+       if (token) {
         axiosConfig.headers = Object.assign({},axiosConfig.headers,{
             Authorization: token
         })
